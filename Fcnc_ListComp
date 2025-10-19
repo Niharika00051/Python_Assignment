@@ -98,7 +98,7 @@ x=format_name('bear')
 print(x)
 #13.	Write a function greet_user(first, last) that returns a message like "Welcome, First Last!".
 def greet_user(first, last):
-    return f"Wlcome,{first} {last}"
+    return f"Welcome,{first} {last}"
 x=greet_user('apple','banana')
 print(x)
 
@@ -114,37 +114,34 @@ print(x(2,40))
 
 # 16.	Write a one-line lambda expression to flatten a list of pairs like [(a,b), (c,d)] into [a, b, c, d].
 flatten = lambda lst: [x for pair in lst for x in pair]
-
-# Example
 nums = [(1, 2), (3, 4)]
 print(flatten(nums))
 
 #Part E — Recursive, Higher-Order & Inner Functions
 #17.	Write a recursive function factorial(n) that returns the factorial of a number.
-def factorial(n):
+def fact(n):
     if n==1:
         return n
     else:
-        return n*factorial(n-1)
-x=factorial(4)
+        return n*fact(n-1)
+x=fact(4)
 print(x)
 
 #18.	Write a function apply_twice(func, x) that applies a function twice → func(func(x)).
 def apply_twice(func, x):
     return func(func(x))
 
-# Example
-def add_three(n):
-    return n + 3
+def mul(n):
+    return n * 3
 
-print(apply_twice(add_three, 7))  # Output: 13 → 7+3+3
+print(apply_twice(mul, 7))
 
 
 # 19.	Write a function inner_demo() that defines and calls an inner function inside it.
 def inner_demo():
     def inner():
-        print("Hello from inner function!")
-    inner()   # call inner function
+        print("Hello charlie")
+    inner()
 
 inner_demo()
 
@@ -152,19 +149,18 @@ inner_demo()
 def call_function(func, value):
     return func(value)
 
-# Example
 def square(x):
     return x * x
 
-print(call_function(square, 5))  # Output: 25
+print(call_function(square, 5))
 
 # 21.	Write a function square_list(nums) that defines a helper function square(x) inside it and returns a list of squares.
-def square_list(nums):
+def square_lst(nums):
     def square(x):
         return x * x
     return [square(n) for n in nums]
 
-print(square_list([1, 2, 3, 4]))  # Output: [1, 4, 9, 16]
+print(square_lst([1, 2, 3, 4]))
 
 # Part F — Intermediate Function Concepts
 # 22.	Write a function make_multiplier(m) that returns a new function which multiplies input values by m.
@@ -174,7 +170,7 @@ def make_multiplier(m):
     return multiplier
 
 double = make_multiplier(2)
-print(double(5))  # Output: 10
+print(double(5))
 
 # 23.	Write a function filter_primes(nums) that filters prime numbers using a helper is_prime() function.
 def filter_primes(nums):
@@ -187,14 +183,13 @@ def filter_primes(nums):
         return True
     return [n for n in nums if is_prime(n)]
 
-print(filter_primes([1,2,3,4,5,6,7]))  # Output: [2, 3, 5, 7]
+print(filter_primes([1,2,3,4,5,6,7]))
 
 #24.	Write a function convert_to_fahrenheit(celsius_list) using map and a lambda.
 def convert_to_fahrenheit(celsius_list):
     return list(map(lambda c: c * 9/5 + 32, celsius_list))
 
-print(convert_to_fahrenheit([0, 100, 37]))  # Output: [32.0, 212.0, 98.6]
-
+print(convert_to_fahrenheit([0, 100, 37]))
 #Formula: F = C * 9/5 + 32
 #25.	Write a function apply_if(func, predicate, iterable) that applies a function only to items that pass a condition.
 def apply_if(func, predicate, iterable):
@@ -208,12 +203,11 @@ print(apply_if(lambda x: x*x, lambda x: x % 2 == 0, nums))
 def curry(func):
     return lambda a: lambda b: func(a, b)
 
-# Example
 def add(a, b):
     return a + b
 
 curried_add = curry(add)
-print(curried_add(3)(4))  # Output: 7
+print(curried_add(3)(4))
 
 #27.	Write a function variadic_sum(*args, **kwargs) that sums all positional arguments and multiplies by a scale factor if provided.
 def variadic_sum(*args, **kwargs):
@@ -221,8 +215,8 @@ def variadic_sum(*args, **kwargs):
     scale = kwargs.get('scale', 1)
     return total * scale
 
-print(variadic_sum(1,2,3))            # Output: 6
-print(variadic_sum(1,2,3, scale=2))   # Output: 12
+print(variadic_sum(1,2,3))            
+print(variadic_sum(1,2,3, scale=2))   
 
 #28.	Write a function sort_by_length(strings) that sorts a list of strings by their length using a lambda as key.
 def sort_by_length(strings):
@@ -291,20 +285,35 @@ x= [[1,2], [3,4], [5]]
 y=[j for i in x for j in i] 
 print(y)
 
-# # 34.	From nums = [0,1,2,3], create a list of 'even' or 'odd' strings.
+# 34.	From nums = [0,1,2,3], create a list of 'even' or 'odd' strings.
 nums = [0,1,2,3]
 x=["even" if i%2==0 else "odd" for i in nums]
 print(x)
 print(type(x))
 
 # # 35.	Using a comprehension, make a list of booleans showing if numbers in a list are prime (use helper function).
+def prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+num = [prime(n) for n in numbers]
+print(num)
 
 # # 36.	From range(1,50), select numbers divisible by both 2 and 3.
 x=[i for i in range(1,51) if i%2==0 and i%3==0]
 print(x)
 
 # # 37.	Create coordinate pairs (i, j) where i and j go from 0 to 2.
+x = [(i, j) for i in range(3) for j in range(3)]
+print(x)
+
 # # 38.	From ['a b','c d e'], produce a flat list of all words.
+words = [word for s in ['a b','c d e'] for word in s.split()]
+print(words)
 
 # # Part B — Using Lists of Dictionaries
 # # 39.	Given students = [{'name':'A','score':80}, {'name':'B','score':60}], Create a list of names of students with score ≥ 75.
@@ -372,7 +381,9 @@ primes = [x for x in range(2, 100) if is_prime(x)]
 # Find pairs (p, q) where p + q is also prime
 prime_pairs = [(p, q) for p in primes for q in primes if is_prime(p + q)]
 print(prime_pairs)
-#or
+
+# or
+
 num = int(input("Enter a number: "))
 
 if num > 1:
@@ -389,7 +400,7 @@ else:
 # 49.	Create a lower-triangular matrix (n×n) with 1s below and on the diagonal, 0s above.
 import numpy as np
 
-n = 4  # size of matrix
+n = 4 
 matrix = np.tril(np.ones((n, n), dtype=int))
 print(matrix)
 
